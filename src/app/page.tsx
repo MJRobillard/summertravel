@@ -7,7 +7,6 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import type { LatLngExpression } from 'leaflet';
-import L from 'leaflet';
 
 // Responsive map components (no SSR)
 const MapContainer = dynamic(() => import('react-leaflet').then(m => m.MapContainer), { ssr: false });
@@ -49,6 +48,41 @@ export default function Home() {
   const [showSummary, setShowSummary] = useState(false);
   const [showTooltip, setShowTooltip] = useState(true);
   const [currentTheme, setCurrentTheme] = useState('default');
+  const [L, setL] = useState<any>(null);
+
+  useEffect(() => {
+    // Import Leaflet only on client side
+    import('leaflet').then((leaflet) => {
+      setL(leaflet.default);
+    });
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => setToday(new Date()), 60_000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowTooltip(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const center: LatLngExpression = [39.8283, -98.5795];
+
+  const currentIndex = segments.findIndex((seg, idx) => {
+    const start = new Date(`${seg.date} 2025`);
+    const endDate = seg.arrive.match(/\((.*?)\)/)?.[1] || seg.date;
+    const end = new Date(`${endDate} 2025`);
+    return today >= start && today < new Date(end.getTime() + 3600000);
+  });
+
+  const getIcon = (num: number) => {
+    if (!L) return null;
+    return new L.DivIcon({
+      html: `<div class="w-6 h-6 flex items-center justify-center bg-blue-500 text-white rounded-full text-xs">${num}</div>`,
+      className: ''
+    });
+  };
 
   const mapThemes = {
     default: {
@@ -85,35 +119,12 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    const timer = setInterval(() => setToday(new Date()), 60_000);
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    // Hide tooltip after 5 seconds
-    const timer = setTimeout(() => setShowTooltip(false), 5000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const center: LatLngExpression = [39.8283, -98.5795];
-
-  const currentIndex = segments.findIndex((seg, idx) => {
-    const start = new Date(`${seg.date} 2025`);
-    const endDate = seg.arrive.match(/\((.*?)\)/)?.[1] || seg.date;
-    const end = new Date(`${endDate} 2025`);
-    return today >= start && today < new Date(end.getTime() + 3600000);
-  });
-
-  const getIcon = (num: number) =>
-    new L.DivIcon({
-      html: `<div class="w-6 h-6 flex items-center justify-center bg-blue-500 text-white rounded-full text-xs">${num}</div>`,
-      className: ''
-    });
+  if (!L) {
+    return <div className="h-screen w-screen flex items-center justify-center">Loading map...</div>;
+  }
 
   return (
     <div className="h-screen w-screen relative">
-      {/* Map */}
       <MapContainer center={center} zoom={4} className="w-full h-full">
         <TileLayer 
           url={mapThemes[currentTheme as keyof typeof mapThemes].url}
