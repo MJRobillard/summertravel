@@ -24,30 +24,41 @@ const itinerary = [
   { city: 'Lincoln, NE', coords: [40.8136, -96.7026], arrival: '2025-06-28', departure: '2025-06-28', nights: 0 },
   { city: 'Chicago, IL', coords: [41.8781, -87.6298], arrival: '2025-06-28', departure: '2025-06-28', nights: 0 },
   { city: 'New York, NY', coords: [40.7128, -74.0060], arrival: '2025-06-28', departure: '2025-06-30', nights: 2 },
-  { city: 'Washington, DC', coords: [38.9072, -77.0369], arrival: '2025-06-30', departure: '2025-07-02', nights: 2 },
-  { city: 'Raleigh, NC', coords: [35.7796, -78.6382], arrival: '2025-07-02', departure: '2025-07-03', nights: 1 },
-  { city: 'Atlanta, GA', coords: [33.7490, -84.3880], arrival: '2025-07-03', departure: '2025-07-04', nights: 1 },
-  { city: 'Fort Worth, TX', coords: [32.7555, -97.3308], arrival: '2025-07-04', departure: '2025-07-04', nights: 0 },
-  { city: 'Oklahoma City, OK', coords: [35.4676, -97.5164], arrival: '2025-07-05', departure: '2025-07-05', nights: 0 },
-  { city: 'Los Angeles, CA', coords: [34.0522, -118.2437], arrival: '2025-07-06', departure: '2025-07-07', nights: 1 },
-  { city: 'Oakland, CA', coords: [37.8044, -122.2711], arrival: '2025-07-08', departure: '2025-07-08', nights: 0 },
+  { city: 'Washington, DC', coords: [38.9072, -77.0369], arrival: '2025-06-30', departure: '2025-07-05', nights: 5 },
+  { city: 'Raleigh, NC', coords: [35.7796, -78.6382], arrival: '2025-07-05', departure: '2025-07-08', nights: 3 },
+  { city: 'Atlanta, GA', coords: [33.7490, -84.3880], arrival: '2025-07-08', departure: '2025-07-09', nights: 1 },
+  { city: 'Fort Worth, TX', coords: [32.7555, -97.3308], arrival: '2025-07-09', departure: '2025-07-09', nights: 0 },
+  { city: 'Oklahoma City, OK', coords: [35.4676, -97.5164], arrival: '2025-07-10', departure: '2025-07-10', nights: 0 },
+  { city: 'Los Angeles, CA', coords: [34.0522, -118.2437], arrival: '2025-07-11', departure: '2025-07-12', nights: 1 },
+  { city: 'Oakland, CA', coords: [37.8044, -122.2711], arrival: '2025-07-13', departure: '2025-07-13', nights: 0 },
 ];
 
 const segments = [
-  { name: 'California Zephyr (OAK→DEN)', from: 'Oakland, CA', to: 'Denver, CO', date: 'Jun 26', depart: '7:15 AM', arrive: '6:38 AM (Jun 27)' },
-  { name: 'California Zephyr (DEN→LIN)', from: 'Denver, CO', to: 'Lincoln, NE', date: 'Jun 27', depart: '7:00 AM', arrive: '1:30 PM (Jun 27)' },
-  { name: 'California Zephyr (LIN→CHI)', from: 'Lincoln, NE', to: 'Chicago, IL', date: 'Jun 28', depart: '6:00 AM', arrive: '2:50 PM (Jun 28)' },
-  { name: 'Lake Shore Limited', from: 'Chicago, IL', to: 'New York, NY', date: 'Jun 28', depart: '3:55 PM', arrive: '6:30 PM (Jun 29)' },
-  { name: 'Regional', from: 'New York, NY', to: 'Washington, DC', date: 'Jun 30', depart: '10:00 AM', arrive: '1:10 PM (Jun 30)' },
-  { name: 'Carolinian', from: 'Washington, DC', to: 'Raleigh, NC', date: 'Jul 1', depart: '7:05 AM', arrive: '3:05 PM (Jul 1)' },
-  { name: 'Crescent', from: 'Raleigh, NC', to: 'Atlanta, GA', date: 'Jul 3', depart: '6:30 AM', arrive: '4:00 PM (Jul 3)' },
-  { name: 'Texas Eagle', from: 'Atlanta, GA', to: 'Fort Worth, TX', date: 'Jul 4', depart: '10:00 AM', arrive: '10:00 PM (Jul 4)' },
-  { name: 'Heartland Flyer', from: 'Fort Worth, TX', to: 'Oklahoma City, OK', date: 'Jul 5', depart: '8:25 AM', arrive: '12:21 PM (Jul 5)' },
-  { name: 'Southwest Chief', from: 'Oklahoma City, OK', to: 'Los Angeles, CA', date: 'Jul 6', depart: '6:00 AM', arrive: '8:00 PM (Jul 6)' },
-  { name: 'Coast Starlight', from: 'Los Angeles, CA', to: 'Oakland, CA', date: 'Jul 7', depart: '10:10 AM', arrive: '9:32 PM (Jul 8)' },
+  { name: 'California Zephyr (OAK→DEN)',    from: 'Oakland, CA',         to: 'Denver, CO',         date: 'Jun 26', depart: '7:15 AM',  arrive: '6:38 AM (Jun 27)' },
+  { name: 'California Zephyr (DEN→LIN)',    from: 'Denver, CO',          to: 'Lincoln, NE',        date: 'Jun 27', depart: '7:00 AM',  arrive: '1:30 PM (Jun 27)' },
+  { name: 'California Zephyr (LIN→CHI)',    from: 'Lincoln, NE',         to: 'Chicago, IL',        date: 'Jun 28', depart: '6:00 AM',  arrive: '2:50 PM (Jun 28)' },
+  { name: 'Lake Shore Limited',             from: 'Chicago, IL',         to: 'New York, NY',       date: 'Jun 28', depart: '3:55 PM',  arrive: '6:30 PM (Jun 29)' },
+  { name: 'Regional',                       from: 'New York, NY',        to: 'Washington, DC',     date: 'Jun 30', depart: '10:00 AM', arrive: '1:10 PM (Jun 30)' },
+  { name: 'Carolinian',                     from: 'Washington, DC',      to: 'Raleigh, NC',        date: 'Jul 5',  depart: '3:08 PM',  arrive: '9:37 PM (Jul 5)' },
+  { name: 'Crescent',                       from: 'Raleigh, NC',         to: 'Atlanta, GA',        date: 'Jul 8',  depart: '6:30 AM',  arrive: '4:00 PM (Jul 8)' },
+  { name: 'Texas Eagle',                    from: 'Atlanta, GA',         to: 'Fort Worth, TX',     date: 'Jul 9',  depart: '10:00 AM', arrive: '10:00 PM (Jul 9)' },
+  { name: 'Heartland Flyer',                from: 'Fort Worth, TX',      to: 'Oklahoma City, OK',  date: 'Jul 10', depart: '8:25 AM',  arrive: '12:21 PM (Jul 10)' },
+  { name: 'Southwest Chief',                from: 'Oklahoma City, OK',   to: 'Los Angeles, CA',    date: 'Jul 11', depart: '6:00 AM',  arrive: '8:00 PM (Jul 11)' },
+  { name: 'Coast Starlight',                from: 'Los Angeles, CA',     to: 'Oakland, CA',        date: 'Jul 12', depart: '10:10 AM', arrive: '9:32 PM (Jul 13)' },
 ];
 
-const routeColors = ['#1a237e','#283593','#303f9f','#3949ab','#3f51b5','#5c6bc0','#7986cb','#9fa8da','#c5cae9'];
+const generateGradientColors = (numSegments: number) => {
+  const startColor = [30, 136, 229]; // #1e88e5 in RGB
+  const endColor = [255, 255, 255];  // #ffffff in RGB
+  
+  return Array.from({ length: numSegments }, (_, i) => {
+    const ratio = i / (numSegments - 1);
+    const r = Math.round(startColor[0] + (endColor[0] - startColor[0]) * ratio);
+    const g = Math.round(startColor[1] + (endColor[1] - startColor[1]) * ratio);
+    const b = Math.round(startColor[2] + (endColor[2] - startColor[2]) * ratio);
+    return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+  });
+};
 
 export default function Home() {
   const [today, setToday] = useState(new Date());
@@ -134,6 +145,9 @@ export default function Home() {
       attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>'
     }
   };
+
+  // Generate route colors based on number of segments
+  const routeColors = generateGradientColors(segments.length);
 
   if (!L) {
     return <div className="h-screen w-screen flex items-center justify-center">Loading map...</div>;
