@@ -53,7 +53,7 @@ export default function Home() {
   const [today, setToday] = useState(new Date());
   const [showSummary, setShowSummary] = useState(false);
   const [showTooltip, setShowTooltip] = useState(true);
-  const [currentTheme, setCurrentTheme] = useState('default');
+  const [currentTheme, setCurrentTheme] = useState('night');
   const [L, setL] = useState<any>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [map, setMap] = useState<LeafletMap | null>(null);
