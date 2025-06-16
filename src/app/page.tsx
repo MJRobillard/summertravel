@@ -58,7 +58,7 @@ export default function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [map, setMap] = useState<LeafletMap | null>(null);
 
-  const themeOrder = ['default', 'dark', 'light', 'satellite', 'terrain', 'topo', 'night', 'minimal'];
+  const themeOrder = ['night','default', 'dark', 'light', 'satellite', 'terrain', 'topo',  'minimal'];
   
   const cycleTheme = () => {
     const currentIndex = themeOrder.indexOf(currentTheme);
